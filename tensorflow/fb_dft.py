@@ -71,7 +71,7 @@ class Analysis(tf.keras.layers.Layer):
         super(Analysis, self).__init__(**kwargs)
         self.fft_size = tf.convert_to_tensor(fb['T'][0,0].item(), dtype=tf.int32)
         self.hop_size = tf.convert_to_tensor(fb['B'][0,0].item(), dtype=tf.int32)
-        self.shift = tf.convert_to_tensor(fb['i'][0,0].item() + fb['j'][0,0].item() - 1, dtype=tf.int32)
+        self.shift = tf.convert_to_tensor(1 - fb['i'][0,0].item() - fb['j'][0,0].item(), dtype=tf.int32)
         self.w = tf.convert_to_tensor(fb['h'][0,0].squeeze()[::-1], dtype=tf.float32)
 
     def call(self, x, bfr=None):
