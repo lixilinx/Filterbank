@@ -72,7 +72,7 @@ class Analysis(torch.nn.Module):
         super(Analysis, self).__init__()
         self.fft_size = fb['T'][0,0].item()
         self.hop_size = fb['B'][0,0].item()
-        self.shift = fb['i'][0,0].item() + fb['j'][0,0].item() - 1
+        self.shift = 1 - fb['i'][0,0].item() - fb['j'][0,0].item()
         self.w = torch.Tensor(fb['h'][0,0].squeeze()).flip([0])
 
     def forward(self, x, bfr=None):
