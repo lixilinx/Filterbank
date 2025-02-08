@@ -17,8 +17,10 @@ x[:,1000] = -1/4
 
 X, ana_bfr = ana(x) # analysis
 y, syn_bfr = syn(X) # synthesis
+e = x[:, :-syn.tau_align] - y[:, syn.tau_align:] # align x and y before error calculation 
 plt.plot(x[0].cpu().numpy())
 plt.plot(y[0].cpu().numpy()) # output should be the same impuses
-plt.legend(['original', 'reconstructed']) 
+plt.plot(e[0].cpu().numpy())
+plt.legend(['original', 'reconstructed', 'error']) 
 plt.title('Nearly PR')
 plt.show()
